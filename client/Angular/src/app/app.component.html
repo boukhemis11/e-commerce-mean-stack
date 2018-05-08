@@ -22,7 +22,7 @@
             <a class="nav-link dropdown-toggle" ngbDropdownToggle>
               <i class="fa fa-user mr-1"></i>
               <span *ngIf="!token">Account</span>
-            <!--  <span *ngIf="token"> {{ name }} </span> -->
+              <span *ngIf="token"> {{ name }} </span>
             </a>
             <div ngbDropdownMenu class="dropown-menu">
               <a *ngIf="token" (click)="closeDropdown(dropdown);collapse();" routerLink="/profile" class="dropdown-item">
