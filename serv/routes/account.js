@@ -35,11 +35,49 @@ router.post('/signup', (req, res, next) => {
             });
             res.json({
                 success: true,
-		        message: 'Enjoy.'
+                message: 'Enjoy.',
+                token :token
             });
         }
     });
 });
 
+router.post('/login', (req, res, next) => {
+ 
+    User.findOne({ email: req.body.email }, function(err, user) {
+        if(err){ res.status(400).json({ success: false, message:'Error processing request '+ err}); }
+
+      
+        if (!user) {
+            res.status(201).json({
+                success: false,
+		        message: 'Authentication failed, User not found'
+            });
+        } else if (user) {
+            validPassword = user.ComparePassword(req.body.password);
+
+            if (!validPassword) {
+                res.json({
+                    success:false,
+                    message: 'Authentication failed, Wrong password'
+                });
+            } else {
+
+           
+
+            var token = jwt.sign({
+                user:user
+            }, config.secret, {
+                expiresIn: '7d'
+            });
+            res.json({
+                success: true,
+                message: 'Enjoy.',
+                token: token
+            });
+        }
+}
+});
+});
 
 module.exports = router;

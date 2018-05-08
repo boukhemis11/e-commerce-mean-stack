@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 searchTerm = '';
-isCollpased = true;
+isCollapsed = true;
 
 
 get token() {
@@ -15,7 +15,7 @@ get token() {
 }
 
 collapse() {
-  this.isCollpased = true;
+  this.isCollapsed = true;
 }
 
 closeDropdown(dropdown) {
